@@ -4,7 +4,7 @@ import 'Track.css';
 class Track extends React.Component {
   renderAction() {
       let anchor = "-";
-      if (isRemoval) {
+      if (this.isRemoval) {
         anchor = "+";
       }
       return anchor

@@ -5,7 +5,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults = [ { name: '', artist: '', album: ''}]
+      searchResults: [ { name: '', artist: '', album: ''}],
+      playlistName: 'Rob',
+      playlistTracks: [{ name: '', artist: '', album: ''}]
     }
   }
 
@@ -19,6 +21,7 @@ class App extends Component {
             {/* <!-- Add a SearchResults component --> */}
             <SearchResults searchResults={this.state.searchResults} />
             {/* <!-- Add a Playlist component --> */}
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Spotify from './util/Spotify';
 import './App.css';
 
 class App extends Component {
@@ -41,6 +42,9 @@ class App extends Component {
 
   search(term) {
     console.log(term);
+    Spotify.search(term).then(tracks => {
+      this.setState({ searchResults: tracks})
+    });
   }
 
   render() {

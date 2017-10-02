@@ -18,6 +18,24 @@ const Spotify = {
       window.history.pushState('Access Token', null, '/');
     }
     window.location = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`;
+  },
+  search(term) {
+    fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}`}
+    }).then( response_type => {
+      return response.json();
+    }).then ( jsonResponse => {
+      return jsonResponse.tracks.map( track => {
+        return {
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          uri: track.uri
+        }
+      });
+    });
   }
 }
 

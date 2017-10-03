@@ -42,6 +42,7 @@ const Spotify = {
     });
   },
   savePlaylist(playlistName, trackURIs) {
+    console.log(trackURIs)
     if (playlistName && trackURIs) {
       let token = Spotify.getAccessToken();
       let headers = { Authorization: `Bearer ${token}`};
@@ -56,21 +57,21 @@ const Spotify = {
           body: JSON.stringify({
             name: playlistName
           })
-      }).then(response => {
-        return response.json();
-      }).then(jsonResponse => {
-        let playlistId = jsonResponse.id;
-        return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
-          headers: headers,
-          method: "POST",
-          body: JSON.stringify({
-            uri: trackURIs
-            })
+        }).then(response => {
+          return response.json();
+        }).then(jsonResponse => {
+          let playlistId = jsonResponse.id;
+          return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+            headers: headers,
+            method: "POST",
+            body: JSON.stringify({
+              uris: trackURIs
+              })
           })
-        }
-      )}
-    )}
+        })
+      })
+    }
   }
-};
+}
 
 export default Spotify;
